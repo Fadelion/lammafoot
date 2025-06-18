@@ -1,0 +1,51 @@
+<div class="hero">
+  <h1>Bienvenue sur Lammafoot</h1>
+  <p>La plateforme de location de stades de football</p>
+  <%= link_to "Voir les stades disponibles", stadia_path, class: "btn btn-primary" %>
+</div>
+
+<section class="featured-stadia">
+  <h2>Stades populaires</h2>
+  
+  <div class="stadia-grid">
+    <% if @stadia.any? %>
+      <% @stadia.each do |stadium| %>
+        <div class="stadium-card">
+          <h3><%= stadium.name %></h3>
+          <p><strong>Localisation:</strong> <%= stadium.location %></p>
+          <p><strong>Capacité:</strong> <%= stadium.capacity %> personnes</p>
+          <p><strong>Prix:</strong> <%= number_to_currency(stadium.price) %> / heure</p>
+          <%= link_to "Voir détails", stadium_path(stadium), class: "btn btn-secondary" %>
+        </div>
+      <% end %>
+    <% else %>
+      <p>Aucun stade disponible pour le moment.</p>
+    <% end %>
+  </div>
+</section>
+
+<section class="how-it-works">
+  <h2>Comment ça marche</h2>
+  
+  <div class="steps">
+    <div class="step">
+      <h3>1. Trouvez votre stade</h3>
+      <p>Parcourez notre sélection de stades et trouvez celui qui correspond à vos besoins.</p>
+    </div>
+    
+    <div class="step">
+      <h3>2. Réservez votre créneau</h3>
+      <p>Choisissez la date et l'heure qui vous conviennent et effectuez votre réservation.</p>
+    </div>
+    
+    <div class="step">
+      <h3>3. Payez en ligne</h3>
+      <p>Effectuez votre paiement de manière sécurisée pour confirmer votre réservation.</p>
+    </div>
+    
+    <div class="step">
+      <h3>4. Jouez et profitez</h3>
+      <p>Rendez-vous au stade à l'heure prévue et profitez de votre session de football.</p>
+    </div>
+  </div>
+</section>
