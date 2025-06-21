@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.min.js" integrity="sha384-7qAoOXltbVP82dhxHAUje59V5r2YsVfBafyUDxEdApLPmcdhBPg1DKg1ERo0BZlK" crossorigin="anonymous"></script>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -23,30 +27,67 @@
   </head>
 
   <body>
-    <header>
-      <nav>
-        <div class="container">
-          <div class="logo">
-            <%= link_to "Lammafoot", root_path %>
-          </div>
-          <div class="nav-links">
-            <%= link_to "Stades", stadia_path %>
+  <!------ le css du navbar ---->
+  <style>
+.nav-links{
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  margin-left: 40px;
+}
+.nav-links a{
+  text-decoration: none ;
+  list-style-type: none ;
+  transition: color 0.3s ease;
+  color:white;
+  margin-left: 10px;
+}
+.logo  a {
+  text-decoration: none ;
+  list-style-type: none ;
+  transition: color 0.3s ease;
+  color:white;
+}
+.container p{
+  color: red;
+  background-color: black;
+  width: 100%;
+  height: 15px; 
+}
+  </style>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <!--- mon logo --->
+    <div class="logo" >
+            <a ><%= link_to "Lammafoot", root_path %></a> 
+    </div>
+    <!--- mon menu --->
+
+    <div class="nav-links">
+          <a><%= link_to "Stades", stadia_path %></a> 
             <% if user_signed_in? %>
-              <%= link_to "Mes réservations", bookings_path %>
-              <%= link_to "Mon profil", profile_path %>
+          <a><%= link_to "Mes réservations", bookings_path %></a>  
+          <a><%= link_to "Mon profil", profile_path %></a> 
               <% if current_user.role == 'admin' %>
-                <%= link_to "Admin", admin_dashboard_path %>
+          <a><%= link_to "Admin", admin_dashboard_path %></a>  
               <% end %>
-              <%= button_to "Déconnexion", destroy_user_session_path, method: :delete %>
+              
+    <!---- <div class="collapse navbar-collapse" id="navbarText"> ---->
+      </div>
+      <span class="navbar-text">
+        <!--- mon deconnection / inscription  --->
+        <%= button_to "Déconnexion", destroy_user_session_path, method: :delete %>
             <% else %>
               <%= link_to "Connexion", new_user_session_path %>
               <%= link_to "Inscription", new_user_registration_path %>
             <% end %>
-          </div>
-        </div>
-      </nav>
-    </header>
+        <!--- mon profile--->
+      </span>
+    </div>
+  </div>
+</nav>
 
+  
     <div class="container">
       <% if notice %>
         <p class="notice"><%= notice %></p>
@@ -58,10 +99,15 @@
       <%= yield %>
     </div>
 
+
+
+    
+
     <footer>
       <div class="container">
-        <p>&copy; <%= Time.current.year %> Lammafoot - Location de stades de football</p>
+        <p style=" background-color: gray; color: white; width: 100%; height:30px; padding: 0px; margin:0px;";>&copy; <%= Time.current.year %> Lammafoot - Location de stades de football</p>
       </div>
     </footer>
   </body>
 </html>
+
