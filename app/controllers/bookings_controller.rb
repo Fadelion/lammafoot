@@ -20,7 +20,9 @@ class BookingsController < ApplicationController
     @booking.user = current_user
 
     if @booking.save
-      redirect_to new_booking_payment_path(@booking), notice: 'Booking was successfully created. Please proceed to payment.'
+      # Envoyer l'email de confirmation
+      BookingMailer.booking_confirmation(@booking).deliver_now
+      redirect_to new_booking_payment_path(@booking), notice: 'Réservation créée avec succès. Un email de confirmation vous a été envoyé. Veuillez procéder au paiement.'
     else
       render :new, status: :unprocessable_entity
     end
@@ -44,9 +46,11 @@ class BookingsController < ApplicationController
   
   def cancel
     if @booking.update(status: 'cancelled')
-      redirect_to bookings_path, notice: 'Booking was successfully cancelled.'
+      # Envoyer l'email d'annulation
+      BookingMailer.booking_cancelled(@booking).deliver_now
+      redirect_to bookings_path, notice: 'Réservation annulée avec succès. Un email de confirmation vous a été envoyé.'
     else
-      redirect_to @booking, alert: 'Unable to cancel booking.'
+      redirect_to @booking, alert: 'Impossible d\'annuler la réservation.'
     end
   end
   

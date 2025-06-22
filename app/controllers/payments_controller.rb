@@ -16,7 +16,9 @@ class PaymentsController < ApplicationController
 
     if @payment.save
       @booking.update(status: 'confirmed')
-      redirect_to booking_path(@booking), notice: 'Payment was successfully processed.'
+      # Envoyer l'email de confirmation de paiement
+      BookingMailer.payment_confirmation(@payment).deliver_now
+      redirect_to booking_path(@booking), notice: 'Paiement traité avec succès. Un email de confirmation vous a été envoyé.'
     else
       render :new, status: :unprocessable_entity
     end
