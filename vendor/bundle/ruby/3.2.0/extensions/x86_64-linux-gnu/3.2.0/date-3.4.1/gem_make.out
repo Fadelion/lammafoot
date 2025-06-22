@@ -1,0 +1,24 @@
+current directory: /media/sf_devfullstacketpa4/lammafoot/vendor/bundle/ruby/3.2.0/gems/date-3.4.1/ext/date
+/usr/bin/ruby3.2 -I/usr/lib/ruby/vendor_ruby extconf.rb
+checking for rb_category_warn()... yes
+checking for timezone in time.h with  -Werror... yes
+checking for altzone in time.h with  -Werror... no
+creating Makefile
+
+current directory: /media/sf_devfullstacketpa4/lammafoot/vendor/bundle/ruby/3.2.0/gems/date-3.4.1/ext/date
+make DESTDIR\= sitearchdir\=./.gem.20250619-9335-5hl3ew sitelibdir\=./.gem.20250619-9335-5hl3ew clean
+
+current directory: /media/sf_devfullstacketpa4/lammafoot/vendor/bundle/ruby/3.2.0/gems/date-3.4.1/ext/date
+make DESTDIR\= sitearchdir\=./.gem.20250619-9335-5hl3ew sitelibdir\=./.gem.20250619-9335-5hl3ew
+compiling date_core.c
+compiling date_parse.c
+compiling date_strftime.c
+compiling date_strptime.c
+linking shared-object date_core.so
+
+current directory: /media/sf_devfullstacketpa4/lammafoot/vendor/bundle/ruby/3.2.0/gems/date-3.4.1/ext/date
+make DESTDIR\= sitearchdir\=./.gem.20250619-9335-5hl3ew sitelibdir\=./.gem.20250619-9335-5hl3ew install
+/usr/bin/install -c -m 0755 date_core.so ./.gem.20250619-9335-5hl3ew
+
+current directory: /media/sf_devfullstacketpa4/lammafoot/vendor/bundle/ruby/3.2.0/gems/date-3.4.1/ext/date
+make DESTDIR\= sitearchdir\=./.gem.20250619-9335-5hl3ew sitelibdir\=./.gem.20250619-9335-5hl3ew clean
