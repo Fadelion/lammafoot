@@ -1,15 +1,15 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  location: MyString
-  price: 9.99
-  capacity: 1
-  description: MyText
+  name: Stade Municipal
+  location: Paris 15e
+  price: 25.0
+  capacity: 22
+  description: Terrain de football en gazon synthétique avec vestiaires
 
 two:
-  name: MyString
-  location: MyString
-  price: 9.99
-  capacity: 1
-  description: MyText
+  name: Complexe Sportif Central
+  location: Lyon 3e
+  price: 30.0
+  capacity: 18
+  description: Terrain de football indoor avec éclairage LED

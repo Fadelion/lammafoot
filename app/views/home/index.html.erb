@@ -1,51 +1,177 @@
-<div class="hero">
-  <h1>Bienvenue sur Lammafoot</h1>
-  <p>La plateforme de location de stades de football</p>
-  <%= link_to "Voir les stades disponibles", stadia_path, class: "btn btn-primary" %>
+<section class="hero">
+  <div class="hero-content">
+    <div class="title-hero">
+      <h1>Bienvenue Sur <span>FootHall</span> Pour vos <span>Services</span> <br> Sportifs</h1>
+      <p>
+        Réservez facilement vos terrains de football en ligne. 
+        Que vous soyez un joueur amateur ou professionnel, trouvez le terrain parfait pour vos matchs.
+      </p>
+      <div>
+        <div class="action-buttons">
+          <%= link_to "Réserver maintenant !", stadia_path, class: "btn btn-primary btn-lg" %>
+          <%= link_to "En savoir plus", "#terrains", class: "btn btn-secondary btn-lg" %>
+        </div>
+        <div class="media-social-hero">
+          <div class="media-social-hero-title mouse-resaeux">
+            <i class="fa-brands fa-facebook-f"></i>
+          </div>
+          <span class="media-social-euro"><%= image_tag "frontend/fac.png", alt: "Facebook" %></span>
+          
+          <div class="monstreReseauInsta">
+            <i class="fa-brands fa-instagram"></i>
+          </div>
+          <span class="mediaSocialInsta"><%= image_tag "frontend/insta.png", alt: "Instagram" %></span>
+
+          <div class="monstreReseauLink">
+            <i class="fa-brands fa-linkedin-in"></i>
+          </div>
+          <span class="mediaSocialLINK"><%= image_tag "frontend/linkdi.png", alt: "LinkedIn" %></span>
+
+          <div class="monstreReseauTiktok">
+            <i class="fa-brands fa-tiktok"></i>
+          </div>
+          <span class="mediaSocialTiktok"><%= image_tag "frontend/tictok.png", alt: "TikTok" %></span>
+        </div>
+      </div>
+    </div>
+
+    <div id="carouselExampleDark" class="carousel carousel-dark slide">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="10000">
+          <%= image_tag "frontend/Stade de football 3d rendant un stade de football avec une arène de terrain bondée _ Photo Premium.jpg", class: "d-block w-100", alt: "Stade 1" %>
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Stades Modernes</h5>
+            <p>Des installations de qualité professionnelle</p>
+          </div>
+        </div>
+        <div class="carousel-item" data-bs-interval="2000">
+          <%= image_tag "frontend/Soccer stadium arena with natural green grass football concept _ Premium AI-generated image.jpg", class: "d-block w-100", alt: "Stade 2" %>
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Gazon Naturel</h5>
+            <p>Terrains en herbe naturelle pour une expérience authentique</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <%= image_tag "frontend/Stadium 5120x1440, 3840x1080, 3440x1440 pixels.jpeg", class: "d-block w-100", alt: "Stade 3" %>
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Éclairage Professionnel</h5>
+            <p>Jouez même en soirée avec notre éclairage de qualité</p>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<div class="separateur-hero"> 
+  <h2>Nos Terrains Disponibles</h2>
+  <p>Découvrez notre sélection de terrains de football de qualité professionnelle</p>
 </div>
 
-<section class="featured-stadia">
-  <h2>Stades populaires</h2>
+<section class="terrains" id="terrains">
+  <div class="filters">
+    <h2 class="title-sectionsecd">Nos Terrains</h2>
+    <div>
+      <input type="text" placeholder="Filtrer par localisation..." id="filtreLocalisation">
+      <button onclick="filtrerTerrains()">Filtrer</button>
+      <%= link_to "Voir tous les terrains", stadia_path, class: "btn", style: "background: #00bfae; color: #fff; border: none; padding: 10px 14px; border-radius: 6px; text-decoration: none;" %>
+    </div>
+  </div>
   
-  <div class="stadia-grid">
+  <div class="slider" id="slider">
     <% if @stadia.any? %>
-      <% @stadia.each do |stadium| %>
-        <div class="stadium-card">
-          <h3><%= stadium.name %></h3>
-          <p><strong>Localisation:</strong> <%= stadium.location %></p>
-          <p><strong>Capacité:</strong> <%= stadium.capacity %> personnes</p>
-          <p><strong>Prix:</strong> <%= number_to_currency(stadium.price) %> / heure</p>
-          <%= link_to "Voir détails", stadium_path(stadium), class: "btn btn-secondary" %>
+      <% @stadia.limit(6).each do |stadium| %>
+        <div class="conponet">
+          <div>
+            <%= link_to stadium_path(stadium) do %>
+              <%= image_tag "frontend/Bing Image Creator.jpg", alt: stadium.name %>
+            <% end %>
+          </div>
+          <div class="title-terrain">
+            <h5><%= stadium.name %></h5>
+            <p><%= truncate(stadium.description, length: 100) %></p>
+            <div class="terrain-etoile">
+              <div class="etoile-color"><i class="fa-solid fa-star"></i></div>
+              <div class="etoile-color"><i class="fa-solid fa-star"></i></div>
+              <div class="etoile-color"><i class="fa-solid fa-star"></i></div>
+              <div class="etoile-color-moitier"><i class="fa-solid fa-star"></i></div>
+              <div><i class="fa-solid fa-star"></i></div>
+              <div class="more"><i class="fa-solid fa-angle-down"></i></div>
+              <div class="etoile-resolt">4.5</div>
+            </div>
+            <div class="Voir-resrve-terrain">
+              <button class="btn btn-primary w-100 button-resever" data-bs-toggle="modal" data-bs-target="#reservationModal" data-stadium-id="<%= stadium.id %>" data-stadium-name="<%= stadium.name %>">Réserver</button>
+            </div>
+          </div>
         </div>
       <% end %>
     <% else %>
-      <p>Aucun stade disponible pour le moment.</p>
+      <div class="conponet">
+        <div class="title-terrain">
+          <h5>Aucun terrain disponible</h5>
+          <p>Revenez bientôt pour découvrir nos terrains</p>
+        </div>
+      </div>
     <% end %>
+    
+    <div class="Voir-plus">
+      <%= link_to "Voir plus", stadia_path, class: "btn" %>
+    </div>
   </div>
 </section>
 
-<section class="how-it-works">
-  <h2>Comment ça marche</h2>
-  
-  <div class="steps">
-    <div class="step">
-      <h3>1. Trouvez votre stade</h3>
-      <p>Parcourez notre sélection de stades et trouvez celui qui correspond à vos besoins.</p>
-    </div>
-    
-    <div class="step">
-      <h3>2. Réservez votre créneau</h3>
-      <p>Choisissez la date et l'heure qui vous conviennent et effectuez votre réservation.</p>
-    </div>
-    
-    <div class="step">
-      <h3>3. Payez en ligne</h3>
-      <p>Effectuez votre paiement de manière sécurisée pour confirmer votre réservation.</p>
-    </div>
-    
-    <div class="step">
-      <h3>4. Jouez et profitez</h3>
-      <p>Rendez-vous au stade à l'heure prévue et profitez de votre session de football.</p>
+<!-- Modal formulaire de réservation -->
+<div class="modal fade" id="reservationModal" tabindex="-1" aria-labelledby="reservationModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content p-3">
+      <div class="modal-header">
+        <h5 class="modal-title" id="reservationModalLabel">Réservation Terrain</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= form_with url: bookings_path, method: :post, id: "formReservation", class: "needs-validation", novalidate: true do |form| %>
+          <div class="mb-3">
+            <%= form.label :user_name, "Nom complet", class: "form-label" %>
+            <%= form.text_field :user_name, class: "form-control", required: true %>
+          </div>
+          <div class="mb-3">
+            <%= form.label :user_email, "Email", class: "form-label" %>
+            <%= form.email_field :user_email, class: "form-control", required: true %>
+          </div>
+          <div class="mb-3">
+            <%= form.label :booking_date, "Date", class: "form-label" %>
+            <%= form.date_field :booking_date, class: "form-control", required: true %>
+          </div>
+          <div class="mb-3">
+            <%= form.label :booking_time, "Heure", class: "form-label" %>
+            <%= form.time_field :booking_time, class: "form-control", required: true %>
+          </div>
+          <div class="mb-3">
+            <%= form.label :payment_method, "Moyen de paiement", class: "form-label" %>
+            <%= form.select :payment_method, options_for_select([
+              ['Choisissez', ''],
+              ['Orange Money', 'Orange Money'],
+              ['Moov Money', 'Moov Money'],
+              ['Carte Bancaire', 'Carte Bancaire']
+            ]), {}, { class: "form-select", required: true } %>
+          </div>
+          <%= form.hidden_field :stadium_id, id: "modal_stadium_id" %>
+          <%= form.submit "Valider la réservation", class: "btn btn-primary w-100" %>
+        <% end %>
+      </div>
     </div>
   </div>
-</section>
+</div>

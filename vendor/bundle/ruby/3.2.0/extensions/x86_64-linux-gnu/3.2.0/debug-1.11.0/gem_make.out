@@ -1,0 +1,19 @@
+current directory: /media/sf_devfullstacketpa4/lammafoot/vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/ext/debug
+/usr/bin/ruby3.2 -I/usr/lib/ruby/vendor_ruby extconf.rb
+creating Makefile
+
+current directory: /media/sf_devfullstacketpa4/lammafoot/vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20250619-9335-6b3jij sitelibdir\=./.gem.20250619-9335-6b3jij clean
+
+current directory: /media/sf_devfullstacketpa4/lammafoot/vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20250619-9335-6b3jij sitelibdir\=./.gem.20250619-9335-6b3jij
+compiling debug.c
+compiling iseq_collector.c
+linking shared-object debug/debug.so
+
+current directory: /media/sf_devfullstacketpa4/lammafoot/vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20250619-9335-6b3jij sitelibdir\=./.gem.20250619-9335-6b3jij install
+/usr/bin/install -c -m 0755 debug.so ./.gem.20250619-9335-6b3jij/debug
+
+current directory: /media/sf_devfullstacketpa4/lammafoot/vendor/bundle/ruby/3.2.0/gems/debug-1.11.0/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20250619-9335-6b3jij sitelibdir\=./.gem.20250619-9335-6b3jij clean

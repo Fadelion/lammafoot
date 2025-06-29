@@ -1,18 +1,22 @@
 require "test_helper"
 
 class ProfilesControllerTest < ActionDispatch::IntegrationTest
-  test "should get show" do
-    get profiles_show_url
-    assert_response :success
+  setup do
+    @user = users(:one)
   end
 
-  test "should get edit" do
-    get profiles_edit_url
-    assert_response :success
+  test "should require authentication for show" do
+    get profile_url
+    assert_redirected_to new_user_session_url
   end
 
-  test "should get update" do
-    get profiles_update_url
-    assert_response :success
+  test "should require authentication for edit" do
+    get edit_profile_url
+    assert_redirected_to new_user_session_url
+  end
+
+  test "should require authentication for update" do
+    patch profile_url
+    assert_redirected_to new_user_session_url
   end
 end

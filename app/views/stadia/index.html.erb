@@ -1,2 +1,31 @@
-<h1>Stadia#index</h1>
-<p>Find me in app/views/stadia/index.html.erb</p>
+<div class="container mt-4">
+  <h1 class="mb-4">Nos Terrains Disponibles</h1>
+  
+  <div class="row">
+    <% @stadia.each do |stadium| %>
+      <div class="col-md-4 mb-4">
+        <div class="card terrain-card">
+          <%= image_tag "frontend/Bing Image Creator.jpg", class: "card-img-top", alt: stadium.name %>
+          <div class="card-body">
+            <h5 class="card-title"><%= stadium.name %></h5>
+            <p class="card-text"><%= truncate(stadium.description, length: 100) %></p>
+            <p class="text-muted"><i class="fas fa-map-marker-alt"></i> <%= stadium.location %></p>
+            <p class="h5 text-primary"><%= number_to_currency(stadium.price, unit: '€', separator: ',') %>/heure</p>
+            <p class="text-muted">Capacité: <%= stadium.capacity %> personnes</p>
+            <div class="d-flex justify-content-between">
+              <%= link_to "Voir détails", stadium_path(stadium), class: "btn btn-outline-primary" %>
+              <%= link_to "Réserver", new_stadium_booking_path(stadium), class: "btn btn-primary" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  
+  <% if @stadia.empty? %>
+    <div class="text-center mt-5">
+      <h3>Aucun terrain disponible pour le moment</h3>
+      <p>Revenez bientôt pour découvrir nos terrains !</p>
+    </div>
+  <% end %>
+</div>

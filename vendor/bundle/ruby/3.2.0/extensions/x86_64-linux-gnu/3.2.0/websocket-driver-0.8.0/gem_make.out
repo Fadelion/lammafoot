@@ -1,0 +1,18 @@
+current directory: /media/sf_devfullstacketpa4/lammafoot/vendor/bundle/ruby/3.2.0/gems/websocket-driver-0.8.0/ext/websocket-driver
+/usr/bin/ruby3.2 -I/usr/lib/ruby/vendor_ruby extconf.rb
+creating Makefile
+
+current directory: /media/sf_devfullstacketpa4/lammafoot/vendor/bundle/ruby/3.2.0/gems/websocket-driver-0.8.0/ext/websocket-driver
+make DESTDIR\= sitearchdir\=./.gem.20250619-9335-4oxp9e sitelibdir\=./.gem.20250619-9335-4oxp9e clean
+
+current directory: /media/sf_devfullstacketpa4/lammafoot/vendor/bundle/ruby/3.2.0/gems/websocket-driver-0.8.0/ext/websocket-driver
+make DESTDIR\= sitearchdir\=./.gem.20250619-9335-4oxp9e sitelibdir\=./.gem.20250619-9335-4oxp9e
+compiling websocket_mask.c
+linking shared-object websocket_mask.so
+
+current directory: /media/sf_devfullstacketpa4/lammafoot/vendor/bundle/ruby/3.2.0/gems/websocket-driver-0.8.0/ext/websocket-driver
+make DESTDIR\= sitearchdir\=./.gem.20250619-9335-4oxp9e sitelibdir\=./.gem.20250619-9335-4oxp9e install
+/usr/bin/install -c -m 0755 websocket_mask.so ./.gem.20250619-9335-4oxp9e
+
+current directory: /media/sf_devfullstacketpa4/lammafoot/vendor/bundle/ruby/3.2.0/gems/websocket-driver-0.8.0/ext/websocket-driver
+make DESTDIR\= sitearchdir\=./.gem.20250619-9335-4oxp9e sitelibdir\=./.gem.20250619-9335-4oxp9e clean

@@ -1,38 +1,24 @@
 require "test_helper"
 
 class BookingsControllerTest < ActionDispatch::IntegrationTest
-  test "should get index" do
-    get bookings_index_url
-    assert_response :success
+  setup do
+    @booking = bookings(:one)
+    @user = users(:one)
+    @stadium = stadia(:one)
   end
 
-  test "should get show" do
-    get bookings_show_url
-    assert_response :success
+  test "should require authentication for index" do
+    get bookings_url
+    assert_redirected_to new_user_session_url
   end
 
-  test "should get new" do
-    get bookings_new_url
-    assert_response :success
+  test "should require authentication for show" do
+    get booking_url(@booking)
+    assert_redirected_to new_user_session_url
   end
 
-  test "should get create" do
-    get bookings_create_url
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get bookings_edit_url
-    assert_response :success
-  end
-
-  test "should get update" do
-    get bookings_update_url
-    assert_response :success
-  end
-
-  test "should get destroy" do
-    get bookings_destroy_url
-    assert_response :success
+  test "should require authentication for new" do
+    get new_stadium_booking_url(@stadium)
+    assert_redirected_to new_user_session_url
   end
 end

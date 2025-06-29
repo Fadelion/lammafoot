@@ -1,2 +1,46 @@
-<h1>Bookings#new</h1>
-<p>Find me in app/views/bookings/new.html.erb</p>
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h3>Réserver <%= @stadium.name %></h3>
+        </div>
+        <div class="card-body">
+          <div class="mb-4">
+            <h5>Informations du terrain</h5>
+            <p><strong>Localisation :</strong> <%= @stadium.location %></p>
+            <p><strong>Prix :</strong> <%= number_to_currency(@stadium.price, unit: '€') %>/heure</p>
+            <p><strong>Capacité :</strong> <%= @stadium.capacity %> personnes</p>
+          </div>
+
+          <%= form_with model: [@stadium, @booking], class: "needs-validation", novalidate: true do |form| %>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <%= form.label :start_date, "Date et heure de début", class: "form-label" %>
+                <%= form.datetime_local_field :start_date, class: "form-control", required: true, min: Time.current.strftime("%Y-%m-%dT%H:%M") %>
+              </div>
+              <div class="col-md-6 mb-3">
+                <%= form.label :end_date, "Date et heure de fin", class: "form-label" %>
+                <%= form.datetime_local_field :end_date, class: "form-control", required: true, min: Time.current.strftime("%Y-%m-%dT%H:%M") %>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <div class="alert alert-info">
+                <i class="fas fa-info-circle"></i>
+                Le prix total sera calculé automatiquement en fonction de la durée de réservation.
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-between">
+              <%= link_to "Retour", stadium_path(@stadium), class: "btn btn-secondary" %>
+              <%= form.submit "Confirmer la réservation", class: "btn btn-primary" %>
+            </div>
+
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

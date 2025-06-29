@@ -3,11 +3,11 @@
 one:
   user: one
   stadium: one
-  rating: 1
-  comment: MyText
+  rating: 4
+  comment: Excellent terrain, bien entretenu et vestiaires propres.
 
 two:
   user: two
   stadium: two
-  rating: 1
-  comment: MyText
+  rating: 5
+  comment: Parfait pour nos matchs d'équipe, je recommande vivement !

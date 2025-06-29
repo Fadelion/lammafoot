@@ -1,7 +1,7 @@
 class StadiaController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
-  before_action :authorize_admin, except: [:index, :show]
-  before_action :set_stadium, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [ :index, :show ]
+  before_action :authorize_admin, except: [ :index, :show ]
+  before_action :set_stadium, only: [ :show, :edit, :update, :destroy ]
 
   def index
     @stadia = Stadium.all
@@ -21,7 +21,7 @@ class StadiaController < ApplicationController
     @stadium = Stadium.new(stadium_params)
 
     if @stadium.save
-      redirect_to @stadium, notice: 'Stadium was successfully created.'
+      redirect_to @stadium, notice: "Stadium was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
@@ -32,7 +32,7 @@ class StadiaController < ApplicationController
 
   def update
     if @stadium.update(stadium_params)
-      redirect_to @stadium, notice: 'Stadium was successfully updated.'
+      redirect_to @stadium, notice: "Stadium was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -40,7 +40,7 @@ class StadiaController < ApplicationController
 
   def destroy
     @stadium.destroy
-    redirect_to stadia_url, notice: 'Stadium was successfully destroyed.'
+    redirect_to stadia_url, notice: "Stadium was successfully destroyed."
   end
 
   private
