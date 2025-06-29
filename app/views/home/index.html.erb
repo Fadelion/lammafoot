@@ -12,10 +12,25 @@
           <%= link_to "En savoir plus", "#terrains", class: "btn btn-secondary btn-lg" %>
         </div>
         <div class="media-social-hero">
-          <div><i class="fa-brands fa-facebook-f"></i></div>
-          <div><i class="fa-brands fa-instagram"></i></div>
-          <div><i class="fa-brands fa-linkedin-in"></i></div>
-          <div><i class="fa-brands fa-tiktok"></i></div>
+          <div class="media-social-hero-title mouse-resaeux">
+            <i class="fa-brands fa-facebook-f"></i>
+          </div>
+          <span class="media-social-euro"><%= image_tag "frontend/fac.png", alt: "Facebook" %></span>
+          
+          <div class="monstreReseauInsta">
+            <i class="fa-brands fa-instagram"></i>
+          </div>
+          <span class="mediaSocialInsta"><%= image_tag "frontend/insta.png", alt: "Instagram" %></span>
+
+          <div class="monstreReseauLink">
+            <i class="fa-brands fa-linkedin-in"></i>
+          </div>
+          <span class="mediaSocialLINK"><%= image_tag "frontend/linkdi.png", alt: "LinkedIn" %></span>
+
+          <div class="monstreReseauTiktok">
+            <i class="fa-brands fa-tiktok"></i>
+          </div>
+          <span class="mediaSocialTiktok"><%= image_tag "frontend/tictok.png", alt: "TikTok" %></span>
         </div>
       </div>
     </div>
@@ -97,8 +112,8 @@
               <div class="more"><i class="fa-solid fa-angle-down"></i></div>
               <div class="etoile-resolt">4.5</div>
             </div>
-            <div class="Voir-reserve-terrain">
-              <%= link_to "Voir Et Réserver", stadium_path(stadium), class: "btn" %>
+            <div class="Voir-resrve-terrain">
+              <button class="btn btn-primary w-100 button-resever" data-bs-toggle="modal" data-bs-target="#reservationModal" data-stadium-id="<%= stadium.id %>" data-stadium-name="<%= stadium.name %>">Réserver</button>
             </div>
           </div>
         </div>
@@ -117,3 +132,46 @@
     </div>
   </div>
 </section>
+
+<!-- Modal formulaire de réservation -->
+<div class="modal fade" id="reservationModal" tabindex="-1" aria-labelledby="reservationModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content p-3">
+      <div class="modal-header">
+        <h5 class="modal-title" id="reservationModalLabel">Réservation Terrain</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= form_with url: bookings_path, method: :post, id: "formReservation", class: "needs-validation", novalidate: true do |form| %>
+          <div class="mb-3">
+            <%= form.label :user_name, "Nom complet", class: "form-label" %>
+            <%= form.text_field :user_name, class: "form-control", required: true %>
+          </div>
+          <div class="mb-3">
+            <%= form.label :user_email, "Email", class: "form-label" %>
+            <%= form.email_field :user_email, class: "form-control", required: true %>
+          </div>
+          <div class="mb-3">
+            <%= form.label :booking_date, "Date", class: "form-label" %>
+            <%= form.date_field :booking_date, class: "form-control", required: true %>
+          </div>
+          <div class="mb-3">
+            <%= form.label :booking_time, "Heure", class: "form-label" %>
+            <%= form.time_field :booking_time, class: "form-control", required: true %>
+          </div>
+          <div class="mb-3">
+            <%= form.label :payment_method, "Moyen de paiement", class: "form-label" %>
+            <%= form.select :payment_method, options_for_select([
+              ['Choisissez', ''],
+              ['Orange Money', 'Orange Money'],
+              ['Moov Money', 'Moov Money'],
+              ['Carte Bancaire', 'Carte Bancaire']
+            ]), {}, { class: "form-select", required: true } %>
+          </div>
+          <%= form.hidden_field :stadium_id, id: "modal_stadium_id" %>
+          <%= form.submit "Valider la réservation", class: "btn btn-primary w-100" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

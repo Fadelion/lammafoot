@@ -18,6 +18,10 @@ gem "stimulus-rails"
 gem "jbuilder"
 # Authentication solution for Rails
 gem "devise"
+# Stripe for payment processing
+gem "stripe"
+# Twilio for SMS and communication
+gem "twilio-ruby"
 
 # dotenv pour stocker les vars du clee API
 gem "dotenv"
@@ -55,7 +59,7 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
-  
+
   # Generate fake data for testing and development
   gem "faker"
 end

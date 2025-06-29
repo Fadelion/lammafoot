@@ -1,2 +1,68 @@
-<h1>Payments#new</h1>
-<p>Find me in app/views/payments/new.html.erb</p>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h3>Paiement de votre réservation</h3>
+        </div>
+        <div class="card-body">
+          <div class="mb-4">
+            <h5>Détails de la réservation</h5>
+            <p><strong>Terrain :</strong> <%= @booking.stadium.name %></p>
+            <p><strong>Date :</strong> <%= @booking.start_date.strftime('%d/%m/%Y de %H:%M') %> à <%= @booking.end_date.strftime('%H:%M') %></p>
+            <p><strong>Durée :</strong> <%= @booking.duration_in_hours %> heure(s)</p>
+            <p><strong>Prix total :</strong> <span class="h4 text-primary"><%= number_to_currency(@booking.total_price, unit: '€', separator: ',', delimiter: ' ') %></span></p>
+          </div>
+
+          <div class="payment-methods">
+            <h5>Choisissez votre méthode de paiement</h5>
+            
+            <!-- Paiement Stripe -->
+            <div class="card mb-3">
+              <div class="card-body">
+                <h6 class="card-title">
+                  <i class="fas fa-credit-card me-2"></i>
+                  Paiement par carte bancaire (Stripe)
+                </h6>
+                <p class="card-text text-muted">Paiement sécurisé par carte bancaire</p>
+                <%= form_with url: booking_payments_path(@booking), method: :post, class: "d-inline" do |form| %>
+                  <%= form.hidden_field :payment_method, value: 'stripe' %>
+                  <%= form.submit "Payer avec Stripe", class: "btn btn-primary" %>
+                <% end %>
+              </div>
+            </div>
+
+            <!-- Paiements traditionnels -->
+            <%= form_with model: [@booking, @payment], class: "needs-validation", novalidate: true do |form| %>
+              <div class="card mb-3">
+                <div class="card-body">
+                  <h6 class="card-title">
+                    <i class="fas fa-mobile-alt me-2"></i>
+                    Paiement mobile
+                  </h6>
+                  <div class="mb-3">
+                    <%= form.label :payment_method, "Méthode de paiement", class: "form-label" %>
+                    <%= form.select :payment_method, 
+                        options_for_select([
+                          ['Orange Money', 'Orange Money'],
+                          ['Moov Money', 'Moov Money'],
+                          ['Flooz', 'Flooz'],
+                          ['T-Money', 'T-Money']
+                        ]), 
+                        { prompt: 'Sélectionnez une méthode' }, 
+                        { class: "form-select", required: true } %>
+                  </div>
+                  <%= form.submit "Confirmer le paiement", class: "btn btn-success" %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+
+          <div class="mt-4">
+            <%= link_to "Retour à la réservation", booking_path(@booking), class: "btn btn-secondary" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

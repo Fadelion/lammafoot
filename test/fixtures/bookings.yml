@@ -3,13 +3,13 @@
 one:
   user: one
   stadium: one
-  start_date: 2025-06-18 20:51:08
-  end_date: 2025-06-18 20:51:08
-  status: MyString
+  start_date: <%= 1.day.from_now %>
+  end_date: <%= 1.day.from_now + 2.hours %>
+  status: confirmed
 
 two:
   user: two
   stadium: two
-  start_date: 2025-06-18 20:51:08
-  end_date: 2025-06-18 20:51:08
-  status: MyString
+  start_date: <%= 2.days.from_now %>
+  end_date: <%= 2.days.from_now + 1.hour %>
+  status: pending
