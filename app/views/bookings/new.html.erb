@@ -1,6 +1,13 @@
 <h1>Bookings#new</h1>
 <p>Find me in app/views/bookings/new.html.erb</p>
 
+
+
+<%= render partial: "form", locals: { bookings: "Creer une nouvelle reservation" }  %>
+
+<%= link_to 'Retour index', bookings_path %>
+
+
 <!--- pour le views--->
 <div class="container py-5">
   <div class="row">

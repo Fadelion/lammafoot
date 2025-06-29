@@ -1,2 +1,8 @@
 <h1>Bookings#show</h1>
 <p>Find me in app/views/bookings/show.html.erb</p>
+
+<h1><%=  @bookings.title %></h1>
+<%= simple_format(@bookings.content) %>
+
+<%= link_to "Editer", edit_bookings_path(@topic) %>
+<%= link_to 'Retour index', bookings_path %>

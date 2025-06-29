@@ -1,2 +1,159 @@
 <h1>Stadia#index</h1>
 <p>Find me in app/views/stadia/index.html.erb</p>
+ 
+      <main>
+
+        <section class="hero-nostarrain">
+          <div class="container">
+            <h1 class="display-5 fw-bold">Réservez les meilleurs terrains en un clic</h1>
+            <p class="lead">Des terrains premium pour vos matchs et événements sportifs</p>
+          </div>
+        </section>
+
+        <div class="container my-5">
+            <div class="row g-4">
+
+              <!-- <div class="col-md-4">
+                <div class="terrain-card">
+                  <div class="video-terrain">
+                    <video controls>
+                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="card-body">
+                    <div class="terrain-title">Terrain VIP - Lomé Centre</div>
+                    <div class="terrain-price">20 000 FCFA / heure</div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam voluptates accusantium saepe, accusamus dolores amet omnis inventore nihil id officia beatae eveniet recusandae, qui aliquam laboriosam rerum cum! Ratione, mollitia!</p>
+                    <a href="https://www.google.com/maps?q=Lomé+Centre" target="_blank" class="btn btn-outline-secondary w-100 mb-2">Voir localisation</a>
+                      <div class="button-to-visualise">
+                        <button class="btn btn-primary w-100 button-resever" data-bs-toggle="modal" data-bs-target="#reservationModal">Réserver</button>
+                        <button class="btn btn-primary w-100 button-resever" data-bs-toggle="modal" data-bs-target="#reservationModal">Visualisation en 3D</button>
+                      </div>                  
+                  </div>
+                </div>
+              </div> -->
+
+
+              <div class="col-md-4">
+                <div class="terrain-card">
+                  <div class="video-terrain">
+                    <video controls>
+                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="card-body">
+                    <div class="terrain-title">Terrain VIP - Lomé Centre</div>
+                    <div class="terrain-price">20 000 FCFA / heure</div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam voluptates accusantium saepe, accusamus dolores amet omnis inventore nihil id officia beatae eveniet recusandae, qui aliquam laboriosam rerum cum! Ratione, mollitia!</p>
+                    <a href="https://www.google.com/maps?q=Lomé+Centre" target="_blank" class="btn btn-outline-secondary w-100 mb-2">Voir localisation</a>
+                      <div class="button-to-visualise">
+                        <div>
+                        <button class="btn btn-primary w-100 button-resever" data-bs-toggle="modal" data-bs-target="#reservationModal">Réserver</button>
+                      </div>
+                      <div class="btn-troi-d-conteint">
+                        <button class="btnd" onclick="openModal()">Voir en 3D</button>
+                      </div>
+                      </div>                  
+                  </div>
+                </div>
+              </div>
+
+              
+              <div class="col-md-4">
+                <div class="terrain-card">
+                  <div class="video-terrain">
+                    <video controls>
+                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="card-body">
+                    <div class="terrain-title">Terrain VIP - Lomé Centre</div>
+                    <div class="terrain-price">20 000 FCFA / heure</div>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quasi neque consequatur quisquam alias nemo culpa nesciunt deleniti et dolore, illo fugiat in aliquam voluptatibus dolorem. Accusamus eum cum omnis totam.</p>
+                    <a href="https://www.google.com/maps?q=Lomé+Centre" target="_blank" class="btn btn-outline-secondary w-100 mb-2">Voir localisation</a>
+                    <div class="button-to-visualise">
+                      <div>
+                        <button class="btn btn-primary w-100 button-resever" data-bs-toggle="modal" data-bs-target="#reservationModal">Réserver</button>
+                      </div>
+                      <div class="btn-troi-d-conteint">
+                        <button class="btnd" onclick="openModal()">Voir en 3D</button>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+        </div>
+
+      <!-- Modal formulaire de réservation -->
+        <div class="modal fade" id="reservationModal" tabindex="-1" aria-labelledby="reservationModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content p-3">
+              <div class="modal-header">
+                <h5 class="modal-title" id="reservationModalLabel">Réservation Terrain VIP - Lomé Centre</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form id="formReservation">
+                  <div class="mb-3">
+                    <label class="form-label">Nom complet</label>
+                    <input type="text" class="form-control" required>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control" required>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Date</label>
+                    <input type="date" class="form-control" required>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Heure</label>
+                    <input type="time" class="form-control" required>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Moyen de paiement</label>
+                    <select class="form-select" required>
+                      <option value="">Choisissez</option>
+                      <option value="Orange Money">Orange Money</option>
+                      <option value="Moov Money">Moov Money</option>
+                      <option value="Carte Bancaire">Carte Bancaire</option>
+                    </select>
+                  </div>
+                  <button type="submit" class="btn btn-primary w-100">Valider la réservation</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        
+
+  <!-- Fenêtre modale -->
+  <div class="modal-jul" id="modal3D">
+    <div class="modal-ju-content">
+      <div class="modal-j-header">Vue 3D du Terrain</div>
+      <div class="modal-juli-body">
+        <img src="https://cdn.pixabay.com/photo/2017/02/23/13/05/stadium-2095779_1280.jpg" alt="Terrain 3D simulé">
+        <p style="margin-top:10px;">Pour le moment la simulation 3D est indisponible nous allons vous informer dès que c'est disponible.</p>
+      </div>
+      <div class="modal-julien">
+        <button class="close-btn" onclick="closeModal()">Fermer</button>
+      </div>
+    </div>
+  </div>
+
+
+      </main>
+
+          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../Script/nos-terrain.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+      crossorigin="anonymous"
+    ></script>
+    
