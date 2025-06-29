@@ -64,6 +64,4 @@ class Booking < ApplicationRecord
       errors.add(:base, "The stadium is already booked during this time period")
     end
   end
-
-  
 end

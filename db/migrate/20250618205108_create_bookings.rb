@@ -5,12 +5,11 @@ class CreateBookings < ActiveRecord::Migration[8.0]
       t.references :stadium, null: false, foreign_key: true
       t.datetime :start_date, null: false
       t.datetime :end_date, null: false
-      t.string :status, default: 'confirmed'
+      t.string :status, default: "confirmed"
 
       t.timestamps
     end
 
-     add_index :bookings, [:pitch_id, :start_time, :end_time], unique: true
+    add_index :bookings, [ :pitch_id, :start_time, :end_time ], unique: true
   end
 end
-
