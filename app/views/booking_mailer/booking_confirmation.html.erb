@@ -19,7 +19,7 @@
       </div>
       
       <div class="content">
-        <p>Bonjour <%= @user.email %>,</p>
+        <p>Bonjour <%= @user.first_name || @user.email %>,</p>
         
         <p>Votre réservation a été confirmée avec succès !</p>
         
@@ -27,9 +27,10 @@
           <h3>Détails de votre réservation :</h3>
           <p><strong>Terrain :</strong> <%= @stadium.name %></p>
           <p><strong>Localisation :</strong> <%= @stadium.location %></p>
-          <p><strong>Date :</strong> <%= @booking.booking_date.strftime("%d/%m/%Y") %></p>
-          <p><strong>Heure :</strong> <%= @booking.start_time.strftime("%H:%M") %> - <%= @booking.end_time.strftime("%H:%M") %></p>
-          <p><strong>Prix total :</strong> <%= number_to_currency(@booking.total_price) %></p>
+          <p><strong>Date :</strong> <%= @booking.start_date.strftime("%d/%m/%Y") %></p>
+          <p><strong>Heure :</strong> <%= @booking.start_date.strftime("%H:%M") %> - <%= @booking.end_date.strftime("%H:%M") %></p>
+          <p><strong>Durée :</strong> <%= @booking.duration_in_hours %> heure(s)</p>
+          <p><strong>Prix total :</strong> <%= number_to_currency(@booking.total_price, unit: '€') %></p>
           <p><strong>Statut :</strong> <%= @booking.status.capitalize %></p>
         </div>
         

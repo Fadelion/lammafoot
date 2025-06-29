@@ -86,15 +86,15 @@ user_stadium_pairs = []
   # Ensure we don't run out of users
   user_index = i % regular_users.length
   user = regular_users[user_index]
-  
+
   # Ensure we don't run out of stadia
   stadium_index = i % created_stadia.length
   stadium = created_stadia[stadium_index]
-  
+
   # Create a unique booking for each iteration
   start_date = Faker::Time.between(from: 1.month.ago, to: 1.day.ago)
   end_date = start_date + 2.hours
-  
+
   booking = Booking.create!(
     user: user,
     stadium: stadium,
@@ -102,19 +102,19 @@ user_stadium_pairs = []
     end_date: end_date,
     status: "completed"
   )
-  
+
   # Create payment for the booking
   Payment.create!(
     user: user,
     booking: booking,
     amount: booking.total_price,
     payment_date: start_date - 2.days,
-    payment_method: ["credit_card", "paypal", "bank_transfer"].sample,
+    payment_method: [ "credit_card", "paypal", "bank_transfer" ].sample,
     status: "completed"
   )
-  
+
   # Create review only if this user-stadium pair hasn't been used yet
-  pair = [user.id, stadium.id]
+  pair = [ user.id, stadium.id ]
   unless user_stadium_pairs.include?(pair)
     Review.create!(
       user: user,
@@ -125,7 +125,7 @@ user_stadium_pairs = []
     user_stadium_pairs << pair
     puts "Review created for #{user.email} on #{stadium.name}"
   end
-  
+
   puts "Past booking created for #{user.email} at #{stadium.name}"
 end
 
@@ -133,10 +133,10 @@ end
 5.times do |i|
   user = regular_users[i % regular_users.length]
   stadium = created_stadia[i % created_stadia.length]
-  
+
   start_date = Faker::Time.between(from: 1.day.from_now, to: 1.month.from_now)
   end_date = start_date + 2.hours
-  
+
   booking = Booking.create!(
     user: user,
     stadium: stadium,
@@ -144,17 +144,17 @@ end
     end_date: end_date,
     status: "confirmed"
   )
-  
+
   # Create payment for the booking
   Payment.create!(
     user: user,
     booking: booking,
     amount: booking.total_price,
     payment_date: Time.current,
-    payment_method: ["credit_card", "paypal", "bank_transfer"].sample,
+    payment_method: [ "credit_card", "paypal", "bank_transfer" ].sample,
     status: "completed"
   )
-  
+
   puts "Future booking created for #{user.email} at #{stadium.name}"
 end
 

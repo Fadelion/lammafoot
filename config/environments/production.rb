@@ -56,17 +56,17 @@ Rails.application.configure do
   # Configuration Action Mailer pour la production
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_caching = false
-  config.action_mailer.default_url_options = { host: ENV['HOST_URL'] || "foothall.com" }
-  
+  config.action_mailer.default_url_options = { host: ENV["HOST_URL"] || "foothall.com" }
+
   # Configuration SMTP pour la production
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: ENV['SMTP_ADDRESS'] || 'smtp.gmail.com',
-    port: ENV['SMTP_PORT'] || 587,
-    domain: ENV['SMTP_DOMAIN'] || 'gmail.com',
-    user_name: ENV['SMTP_USERNAME'],
-    password: ENV['SMTP_PASSWORD'],
-    authentication: 'plain',
+    address: ENV["SMTP_ADDRESS"] || "smtp.gmail.com",
+    port: ENV["SMTP_PORT"] || 587,
+    domain: ENV["SMTP_DOMAIN"] || "gmail.com",
+    user_name: ENV["SMTP_USERNAME"],
+    password: ENV["SMTP_PASSWORD"],
+    authentication: "plain",
     enable_starttls_auto: true
   }
 

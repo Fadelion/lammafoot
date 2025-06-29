@@ -58,10 +58,14 @@ header {
 }
 
 .nav-bar nav ul li a {
-  font-weight: 600;
+  font-weight: 700;
   font-size: 18px;
   text-decoration: none;
   color: #01496a;
+}
+
+.nav-bar nav ul li a:hover {
+  border-bottom: 3px solid #00bfae;
 }
 
 .btn {
@@ -75,6 +79,11 @@ header {
   color: #01496a;
   background-color: #f6f8fb00;
   border: 1px solid #01496a;
+}
+
+#seConnecter_button:hover {
+  color: #fff;
+  background-color: #00bfae;
 }
 
 .logo {
@@ -146,6 +155,22 @@ header {
   font-weight: 600;
   margin-bottom: 18px;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  animation: heroTitleFadeIn 2s ease-in-out;
+}
+
+@keyframes heroTitleFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-40px) scale(0.95);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(10px) scale(1.03);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .media-social-hero {
@@ -162,8 +187,12 @@ header {
   width: 50px;
   height: 50px;
   font-size: 23px;
-  border: 2px solid rgba(0, 0, 0, 0.288);
+  border: 2px solid #01496a;
   border-radius: 10px;
+}
+
+.media-social-hero div i {
+  color: #01496a;
 }
 
 .carousel {
@@ -280,7 +309,7 @@ header {
 }
 
 .title-terrain h5 {
-  color: #00bfae;
+  color: #01496a;
   font-size: 25px;
   font-weight: 700;
 }
@@ -309,7 +338,7 @@ header {
   -webkit-text-fill-color: transparent;
 }
 
-.Voir-reserve-terrain button {
+.Voir-resrve-terrain button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -320,12 +349,10 @@ header {
   border-radius: 5px;
   border: none;
   background-color: #00bfae;
-  text-decoration: none;
 }
 
-.Voir-reserve-terrain button:hover {
+.Voir-resrve-terrain button:hover {
   background-color: #01496a;
-  color: white;
 }
 
 .filters {
@@ -506,4 +533,68 @@ footer {
 
 .btn-submit:hover {
   background-color: #009e90;
+}
+
+/* Animations et effets pour les réseaux sociaux */
+.hero p {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 3px solid #00bfae;
+  width: 0;
+  animation: typingEffect 3s steps(40, end) 0.5s forwards, blinkCaret 0.7s step-end infinite;
+}
+
+@keyframes typingEffect {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blinkCaret {
+  0%, 100% { border-color: transparent; }
+  50% { border-color: #00bfae; }
+}
+
+.media-social-euro, .mediaSocialInsta, .mediaSocialLINK, .mediaSocialTiktok {
+  display: none;
+}
+
+.media-social-euro img {
+  background-color: #fff;
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: MediaMouseReseaux 2s ease-in-out;
+  box-shadow: 1px -1px 20px #000000d3;
+}
+
+.mediaSocialInsta img,
+.mediaSocialLINK img, 
+.mediaSocialTiktok img {
+  background-color: #fff;
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: MediaMouseReseaux 2s ease-in-out;
+  box-shadow: 1px -1px 20px #000000d3;
+}
+
+@keyframes MediaMouseReseaux {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(10px) scale(1.03);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }

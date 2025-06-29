@@ -41,8 +41,73 @@ function filtrerTerrains() {
   }
 }
 
-// Fonction pour les alertes de réservation
+// Carrousel automatique Bootstrap
+window.addEventListener('DOMContentLoaded', function () {
+  var carousel = document.querySelector('#carouselExampleDark');
+  if (carousel && window.bootstrap && bootstrap.Carousel) {
+    new bootstrap.Carousel(carousel, {
+      interval: 9000,
+      ride: 'carousel',
+      pause: false,
+      wrap: true
+    });
+  }
+});
+
+// Fonction générique pour afficher/masquer les images médias sociaux au survol de chaque icône
+function toggleMediaSocialHero() {
+  const pairs = [
+    ['.mouse-resaeux', '.media-social-euro'],
+    ['.monstreReseauInsta', '.mediaSocialInsta'],
+    ['.monstreReseauLink', '.mediaSocialLINK'],
+    ['.monstreReseauTiktok', '.mediaSocialTiktok']
+  ];
+
+  pairs.forEach(([iconClass, mediaClass]) => {
+    const icon = document.querySelector(iconClass);
+    const media = document.querySelector(mediaClass);
+    if (icon && media) {
+      icon.addEventListener('mouseenter', function () {
+        icon.style.display = 'none';
+        media.style.display = 'flex';
+      });
+      media.addEventListener('mouseleave', function () {
+        media.style.display = 'none';
+        icon.style.display = 'flex';
+      });
+    }
+  });
+}
+
+// Gestion du modal de réservation
+function setupReservationModal() {
+  const reservationButtons = document.querySelectorAll('.button-resever');
+  const modalTitle = document.getElementById('reservationModalLabel');
+  const stadiumIdField = document.getElementById('modal_stadium_id');
+  
+  reservationButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      const stadiumId = this.getAttribute('data-stadium-id');
+      const stadiumName = this.getAttribute('data-stadium-name');
+      
+      if (modalTitle && stadiumName) {
+        modalTitle.textContent = `Réservation ${stadiumName}`;
+      }
+      
+      if (stadiumIdField && stadiumId) {
+        stadiumIdField.value = stadiumId;
+      }
+    });
+  });
+}
+
+// Initialisation au chargement de la page
+window.addEventListener('DOMContentLoaded', function() {
+  toggleMediaSocialHero();
+  setupReservationModal();
+});
+
+// Fonction pour les alertes de réservation (conservée pour compatibilité)
 function reserverTerrain(terrainId) {
   alert(`Redirection vers la réservation du terrain ${terrainId}`);
-  // Ici vous pouvez ajouter la logique de redirection vers la page de réservation
 }
