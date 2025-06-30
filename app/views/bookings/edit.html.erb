@@ -1,2 +1,7 @@
 <h1>Bookings#edit</h1>
 <p>Find me in app/views/bookings/edit.html.erb</p>
+
+<%= render partial: "form", locals: { notice: "Editer une reservation" }  %>
+
+<%= link_to 'Retour index', bookings_path %>
+<%= link_to 'Voir sujet', @bookings %>
