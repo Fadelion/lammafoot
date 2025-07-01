@@ -1,11 +1,15 @@
-#<h1>Bookings#index</h1>
-#<p>Find me in app/views/bookings/index.html.erb</p>
-
-<h1>Sujets de discusion</h1>
+ 
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Liste des reservations: </h1>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
-   # <title><%= @title %></title>
-
     <%= stylesheet_link_tag "application", media: "all" %>
     <%= javascript_include_tag "application", data: { turbo_track: "reload" } %>
     <%= csrf_meta_tags %>
@@ -18,11 +22,12 @@
 <table class="table table-striped">
   <thead>
     <tr class="medium-4 columns" >
-      <th scope="col">Nom complet</th>
-      <th scope="col">Localisation</th>
-      <th scope="col">Prix</th>
+      <th scope="col">ID</th>
       <th scope="col">Date de debut</th>
       <th scope="col">Date de fin</th>
+      <th scope="col">Voir </th>
+      <th scope="col">Editer</th>
+      <th scope="col">Supprimer</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -31,13 +36,11 @@
     <% @bookings.each do |booking| %>
     <tr>
       <td><%= booking.id %></td>
-      <td><%= booking.location %></td>
-      <td><%= booking.price %></td>
       <td><%= booking.start_date %></td>
       <td><%= booking.end_date %></td>
       <td><%= link_to 'Voir', booking %></td>
-      <td><%= link_to 'Editer', edit_booking_path(bookings) %></td>
-      <td><%= link_to 'Supprimer', bookings, method: :delete, data: { confirm: 'Etes-vous sur ?'} %></td>
+      <td><%= link_to 'Editer', edit_booking_path(booking) %></td>
+      <td><%= link_to 'Supprimer', booking, method: :delete, data: { confirm: 'Etes-vous sur ?'} %></td>
     </tr>
     <% end %>
    
@@ -47,7 +50,7 @@
 <%= link_to 'Nouvelle reservation', new_booking_path %>
 <%= link_to  'Retour',  new_booking_path %>
 
-  # charger du  scripte
+ 
     <script src="../Script/nos-terrain.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
