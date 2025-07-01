@@ -25,7 +25,13 @@ gem "twilio-ruby"
 
 # dotenv pour stocker les vars du clee API
 gem "dotenv"
+<<<<<<< Updated upstream
 # gem stripe
+=======
+
+# add dotenv-rails at gemfile 
+# gem stripe 
+>>>>>>> Stashed changes
 gem "stripe"
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
