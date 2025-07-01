@@ -1,2 +1,56 @@
-<h1>Profiles#edit</h1>
-<p>Find me in app/views/profiles/edit.html.erb</p>
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h3>Modifier mon profil</h3>
+        </div>
+        <div class="card-body">
+          <%= form_with model: @user, url: profile_path, method: :patch, class: "needs-validation", novalidate: true do |form| %>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <%= form.label :first_name, "Prénom", class: "form-label" %>
+                <%= form.text_field :first_name, class: "form-control", required: true %>
+                <div class="invalid-feedback">
+                  Veuillez saisir votre prénom.
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <%= form.label :last_name, "Nom", class: "form-label" %>
+                <%= form.text_field :last_name, class: "form-control", required: true %>
+                <div class="invalid-feedback">
+                  Veuillez saisir votre nom.
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <%= form.label :email, "Email", class: "form-label" %>
+              <%= form.email_field :email, class: "form-control", required: true, readonly: true %>
+              <div class="form-text">L'email ne peut pas être modifié ici. Utilisez les paramètres de compte Devise.</div>
+            </div>
+
+            <div class="mb-3">
+              <%= form.label :phone_number, "Numéro de téléphone", class: "form-label" %>
+              <%= form.telephone_field :phone_number, class: "form-control", placeholder: "+33 6 12 34 56 78" %>
+              <div class="form-text">Format international recommandé (ex: +33 6 12 34 56 78)</div>
+            </div>
+
+            <div class="d-flex justify-content-between">
+              <%= link_to "Retour au profil", profile_path, class: "btn btn-secondary" %>
+              <%= form.submit "Mettre à jour", class: "btn btn-primary" %>
+            </div>
+          <% end %>
+
+          <hr class="my-4">
+          
+          <div class="text-center">
+            <h5>Gestion du compte</h5>
+            <p class="text-muted">Pour modifier votre mot de passe ou supprimer votre compte</p>
+            <%= link_to "Paramètres du compte", edit_user_registration_path, class: "btn btn-outline-primary" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -81,23 +81,5 @@ class BookingsController < ApplicationController
       params.require(:booking).permit(:start_date, :end_date)
     end
 
-    # processe de payement 
-    def process_payment
-    # Intégration avec Stripe (ou autre système de paiement)
-    payment = @booking.create_payment(
-      amount: @booking.total_price,
-      status: 'pending',
-      payment_method: params[:payment_method]
-    )
-    
-    # Logique de paiement (à remplacer par votre intégration réelle)
-    if payment.process
-      payment.update(status: 'paid')
-      BookingMailer.confirmation(@booking).deliver_later
-    else
-      @booking.destroy
-      flash[:alert] = "Le paiement a échoué. Veuillez réessayer."
-      render :new
-    end
-  end
+
 end

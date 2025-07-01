@@ -23,6 +23,9 @@ gem "stripe"
 # Twilio for SMS and communication
 gem "twilio-ruby"
 
+# Sendgrid for email sending
+gem 'sendgrid-ruby'
+
 # dotenv pour stocker les vars du clee API
 gem "dotenv"
 

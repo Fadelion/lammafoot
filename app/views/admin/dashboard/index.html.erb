@@ -1,0 +1,101 @@
+<% content_for :title, "Admin Dashboard" %>
+
+<div class="container mt-4">
+  <h1>Admin Dashboard</h1>
+  
+  <div class="row mb-4">
+    <div class="col-md-3">
+      <div class="card text-center">
+        <div class="card-body">
+          <h5 class="card-title">Users</h5>
+          <h2 class="text-primary"><%= @users_count %></h2>
+          <%= link_to "Manage Users", admin_users_path, class: "btn btn-primary btn-sm" %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-3">
+      <div class="card text-center">
+        <div class="card-body">
+          <h5 class="card-title">Stadia</h5>
+          <h2 class="text-success"><%= @stadia_count %></h2>
+          <%= link_to "Manage Stadia", admin_stadia_path, class: "btn btn-success btn-sm" %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-3">
+      <div class="card text-center">
+        <div class="card-body">
+          <h5 class="card-title">Bookings</h5>
+          <h2 class="text-warning"><%= @bookings_count %></h2>
+          <%= link_to "Manage Bookings", admin_bookings_path, class: "btn btn-warning btn-sm" %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-3">
+      <div class="card text-center">
+        <div class="card-body">
+          <h5 class="card-title">Quick Actions</h5>
+          <%= link_to "New Stadium", new_admin_stadium_path, class: "btn btn-info btn-sm mb-2 d-block" %>
+          <%= link_to "All Payments", admin_payments_path, class: "btn btn-secondary btn-sm d-block" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <h3>Recent Bookings</h3>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>User</th>
+              <th>Stadium</th>
+              <th>Date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @recent_bookings.each do |booking| %>
+              <tr>
+                <td><%= booking.user.first_name %> <%= booking.user.last_name %></td>
+                <td><%= booking.stadium.name %></td>
+                <td><%= booking.start_date.strftime("%d/%m/%Y %H:%M") %></td>
+                <td><span class="badge bg-<%= booking.status == 'confirmed' ? 'success' : 'warning' %>"><%= booking.status %></span></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    <div class="col-md-6">
+      <h3>Recent Users</h3>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Joined</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @recent_users.each do |user| %>
+              <tr>
+                <td><%= user.first_name %> <%= user.last_name %></td>
+                <td><%= user.email %></td>
+                <td><span class="badge bg-<%= user.role == 'admin' ? 'danger' : 'primary' %>"><%= user.role %></span></td>
+                <td><%= user.created_at.strftime("%d/%m/%Y") %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

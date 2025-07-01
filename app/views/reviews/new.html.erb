@@ -1,2 +1,72 @@
-<h1>Reviews#new</h1>
-<p>Find me in app/views/reviews/new.html.erb</p>
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h3>Laisser un avis pour <%= @stadium.name %></h3>
+        </div>
+        <div class="card-body">
+          <div class="mb-4">
+            <p><strong>Terrain :</strong> <%= @stadium.name %></p>
+            <p><strong>Localisation :</strong> <%= @stadium.location %></p>
+          </div>
+
+          <%= form_with model: [@stadium, @review], class: "needs-validation", novalidate: true do |form| %>
+            <div class="mb-3">
+              <%= form.label :rating, "Note (sur 5)", class: "form-label" %>
+              <div class="rating-input">
+                <% (1..5).each do |i| %>
+                  <input type="radio" name="review[rating]" value="<%= i %>" id="star<%= i %>" required>
+                  <label for="star<%= i %>" class="star-label">
+                    <i class="fas fa-star"></i>
+                  </label>
+                <% end %>
+              </div>
+              <div class="invalid-feedback">
+                Veuillez sélectionner une note.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <%= form.label :comment, "Votre commentaire", class: "form-label" %>
+              <%= form.text_area :comment, class: "form-control", rows: 4, required: true, placeholder: "Partagez votre expérience sur ce terrain..." %>
+              <div class="invalid-feedback">
+                Veuillez saisir un commentaire.
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-between">
+              <%= link_to "Retour", stadium_path(@stadium), class: "btn btn-secondary" %>
+              <%= form.submit "Publier l'avis", class: "btn btn-primary" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.rating-input {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+
+.rating-input input[type="radio"] {
+  display: none;
+}
+
+.star-label {
+  color: #ddd;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.rating-input input[type="radio"]:checked ~ .star-label,
+.rating-input input[type="radio"]:hover ~ .star-label,
+.star-label:hover {
+  color: #ffc107;
+}
+</style>

@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-  get "profiles/show"
-  get "profiles/edit"
-  get "profiles/update"
+
   # Devise routes for authentication
   devise_for :users
 
