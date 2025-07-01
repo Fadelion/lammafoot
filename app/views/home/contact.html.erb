@@ -1,0 +1,53 @@
+<header>
+  <div class="logo">
+    <%= image_tag("logo.png", alt: "Logo") %>
+  </div>
+  <div class="nav-bar">
+    <nav>
+      <ul>
+        <div>
+          <li><%= link_to "Accueil", root_path %></li>
+        </div>
+        <div>
+          <li><%= link_to "Réservations", "#" %></li>
+        </div>
+        <div>
+          <li><%= link_to "Nos Terrains", stadia_path %></li>
+        </div>
+        <div>
+          <li><%= link_to "Contact", contact_index_path %></li>
+        </div>
+      </ul>
+    </nav>
+    <div class="search-icon">
+      <i class="fa-light fa-magnifying-glass"></i>
+    </div>
+  </div>
+  <div>
+    <div class="se-connecter">
+      <%= link_to "Se Connecter", "#", class: "btn btn-primary", id: "seConnecter_button" %>
+      <%= link_to "S'inscrire", "#", class: "btn btn-primary" %>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="contact-container">
+    <h2>Contactez-nous</h2>
+    <form>
+      <div class="form-group">
+        <label for="name">Nom</label>
+        <input type="text" id="name" placeholder="Votre nom" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="Votre email" required>
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" rows="5" placeholder="Votre message..." required></textarea>
+      </div>
+      <button type="submit" class="btn-submit">Envoyer</button>
+    </form>
+  </div>
+</main>
