@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: ENV["MAILER_FROM"] || "noreply@foothall.com"
+  default from: ENV["SENDGRID_FROM_EMAIL"] || "noreply@lammafoot.com"
   layout "mailer"
 end

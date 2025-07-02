@@ -25,9 +25,9 @@
                   Paiement par carte bancaire (Stripe)
                 </h6>
                 <p class="card-text text-muted">Paiement sécurisé par carte bancaire</p>
-                <%= form_with url: booking_payments_path(@booking), method: :post, class: "d-inline" do |form| %>
+                <%= form_with url: booking_payments_path(@booking), method: :post, class: "d-inline", data: { turbo: false } do |form| %>
                   <%= form.hidden_field :payment_method, value: 'stripe' %>
-                  <%= form.submit "Payer avec Stripe", class: "btn btn-primary" %>
+                  <%= form.submit "Payer avec Stripe", class: "btn btn-primary", onclick: "this.form.target='_blank'" %>
                 <% end %>
               </div>
             </div>

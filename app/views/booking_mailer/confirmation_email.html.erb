@@ -1,0 +1,14 @@
+<%= render layout: "booking_mailer/email_layout", locals: { header_color: "#00bfae", header_title: "Confirmation de Réservation" } do %>
+  <p>Bonjour <strong><%= @user.first_name || @user.email %></strong>,</p>
+  
+  <p>Votre réservation a été confirmée avec succès !</p>
+  
+  <%= render partial: "booking_mailer/booking_details" %>
+  
+  <p>Nous vous rappelons de vous présenter 15 minutes avant l'heure de début.</p>
+  
+  <p>
+    Cordialement,<br>
+    L'équipe LammaFoot
+  </p>
+<% end %>

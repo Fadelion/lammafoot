@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <style>
+      body { font-family: Arial, sans-serif; margin: 20px; }
+      .header { background-color: #4CAF50; color: white; padding: 20px; text-align: center; }
+      .content { padding: 20px; }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>🏟️ LammaFoot - Test Email</h1>
+    </div>
+    <div class="content">
+      <h2>Bonjour !</h2>
+      <p>Ceci est un email de test pour vérifier que la configuration de <strong>letter_opener_web</strong> fonctionne correctement.</p>
+      <p><strong>Email destinataire :</strong> <%= @user_email %></p>
+      <p><strong>Date d'envoi :</strong> <%= Time.current.strftime("%d/%m/%Y à %H:%M") %></p>
+      <hr>
+      <p><em>Si vous recevez cet email, la configuration des emails fonctionne parfaitement ! ✅</em></p>
+    </div>
+  </body>
+</html>

@@ -1,37 +1,35 @@
 class BookingMailer < ApplicationMailer
-  default from: "noreply@foothall.com"
-
-  def booking_confirmation(booking)
+  def confirmation_email(booking)
     @booking = booking
     @user = booking.user
     @stadium = booking.stadium
-
+    
     mail(
       to: @user.email,
-      subject: "Confirmation de votre réservation - FootHall"
+      subject: "Confirmation de réservation - #{@stadium.name}"
     )
   end
-
-  def booking_cancelled(booking)
+  
+  def cancellation_email(booking)
     @booking = booking
     @user = booking.user
     @stadium = booking.stadium
-
+    
     mail(
       to: @user.email,
-      subject: "Annulation de votre réservation - FootHall"
+      subject: "Annulation de réservation - #{@stadium.name}"
     )
   end
 
   def payment_confirmation(payment)
     @payment = payment
     @booking = payment.booking
-    @user = @booking.user
+    @user = payment.user
     @stadium = @booking.stadium
-
+    
     mail(
       to: @user.email,
-      subject: "Confirmation de paiement - FootHall"
+      subject: "Confirmation de paiement - #{@stadium.name}"
     )
   end
 
@@ -39,10 +37,10 @@ class BookingMailer < ApplicationMailer
     @booking = booking
     @user = booking.user
     @stadium = booking.stadium
-
+    
     mail(
       to: @user.email,
-      subject: "Rappel de votre réservation - FootHall"
+      subject: "Rappel de réservation - #{@stadium.name}"
     )
   end
 end

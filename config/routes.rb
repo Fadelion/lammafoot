@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
-  get "profiles/show"
-  get "profiles/edit"
-  get "profiles/update"
+  # Letter Opener Web routes for development
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
+
   # Devise routes for authentication
   devise_for :users
 
@@ -18,6 +20,7 @@ Rails.application.routes.draw do
   resources :bookings do
     resources :payments, only: [ :new, :create, :show ]
     member do
+      get :cancel
       patch :cancel
       patch :complete
       get "payment/success", to: "payments#stripe_success", as: :payment_success
@@ -43,7 +46,14 @@ Rails.application.routes.draw do
     resources :reviews
 
     # Admin dashboard
+    root "dashboard#index"
     get "dashboard", to: "dashboard#index"
+  end
+
+  # Email test routes (development only)
+  if Rails.env.development?
+    get "/email_test", to: "home#email_test"
+    post "/send_test_email", to: "email_test#send_test_email"
   end
 
   # Webhook routes

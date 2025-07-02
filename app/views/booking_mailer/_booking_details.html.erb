@@ -1,0 +1,13 @@
+<div class="booking-details">
+  <h3>Détails de votre réservation</h3>
+  <p><strong>Stade :</strong> <%= @stadium.name %></p>
+  <p><strong>Lieu :</strong> <%= @stadium.location %></p>
+  <p><strong>Date et heure :</strong> <%= @booking.start_date.strftime("%d/%m/%Y de %H:%M") %> à <%= @booking.end_date.strftime("%H:%M") %></p>
+  <p><strong>Durée :</strong> <%= @booking.duration_in_hours %> heure(s)</p>
+  <p><strong>Prix total :</strong> <%= number_to_currency(@booking.total_price, unit: "€") %></p>
+  <% if defined?(@payment) && @payment %>
+    <p><strong>Montant payé :</strong> <%= number_to_currency(@payment.amount, unit: "€") %></p>
+    <p><strong>Méthode de paiement :</strong> <%= @payment.payment_method.capitalize %></p>
+  <% end %>
+  <p><strong>Statut :</strong> <%= @booking.status.capitalize %></p>
+</div>

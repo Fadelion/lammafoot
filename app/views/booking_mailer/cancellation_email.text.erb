@@ -1,0 +1,19 @@
+LAMMAFOOT - Annulation de Réservation
+
+Bonjour <%= @user.first_name || @user.email %>,
+
+Votre réservation a été annulée.
+
+DÉTAILS DE LA RÉSERVATION :
+- Stade : <%= @stadium.name %>
+- Lieu : <%= @stadium.location %>
+- Date et heure : <%= @booking.start_date.strftime("%d/%m/%Y de %H:%M") %> à <%= @booking.end_date.strftime("%H:%M") %>
+- Durée : <%= @booking.duration_in_hours %> heure(s)
+- Prix total : <%= number_to_currency(@booking.total_price, unit: "€") %>
+
+Si un paiement avait été effectué, le remboursement sera traité dans les 3-5 jours ouvrables.
+
+Cordialement,
+L'équipe LammaFoot
+
+© <%= Date.current.year %> LammaFoot - Votre plateforme de réservation de terrains

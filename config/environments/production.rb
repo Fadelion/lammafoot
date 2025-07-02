@@ -58,15 +58,15 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
   config.action_mailer.default_url_options = { host: ENV["HOST_URL"] || "foothall.com" }
 
-  # Configuration SMTP pour la production
+  # Configuration SendGrid SMTP pour la production
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: ENV["SMTP_ADDRESS"] || "smtp.gmail.com",
-    port: ENV["SMTP_PORT"] || 587,
-    domain: ENV["SMTP_DOMAIN"] || "gmail.com",
-    user_name: ENV["SMTP_USERNAME"],
-    password: ENV["SMTP_PASSWORD"],
-    authentication: "plain",
+    address: 'smtp.sendgrid.net',
+    port: 587,
+    domain: ENV["HOST_URL"] || "foothall.com",
+    user_name: 'apikey',
+    password: ENV['SENDGRID_API_KEY'],
+    authentication: 'plain',
     enable_starttls_auto: true
   }
 

@@ -21,7 +21,7 @@ class BookingsController < ApplicationController
 
     if @booking.save
       # Envoyer l'email de confirmation
-      BookingMailer.booking_confirmation(@booking).deliver_now
+      BookingMailer.confirmation_email(@booking).deliver_now
       redirect_to new_booking_payment_path(@booking), notice: 'Réservation créée avec succès. Un email de confirmation vous a été envoyé. Veuillez procéder au paiement.'
     else
       render :new, status: :unprocessable_entity
@@ -45,11 +45,16 @@ class BookingsController < ApplicationController
   end
   
   def cancel
-    if @booking.update(status: 'cancelled')
-      # Envoyer l'email d'annulation
-      BookingMailer.booking_cancelled(@booking).deliver_now
-      redirect_to bookings_path, notice: 'Réservation annulée avec succès. Un email de confirmation vous a été envoyé.'
-    else
+    if @booking.status == 'cancelled'
+      return redirect_to @booking, alert: 'Cette réservation est déjà annulée.'
+    end
+
+    begin
+      @booking.update!(status: 'cancelled')
+      BookingMailer.cancellation_email(@booking).deliver_now
+      redirect_to bookings_path, notice: 'Réservation annulée avec succès.'
+    rescue => e
+      Rails.logger.error "Booking cancellation error: #{e.message}"
       redirect_to @booking, alert: 'Impossible d\'annuler la réservation.'
     end
   end
@@ -81,23 +86,5 @@ class BookingsController < ApplicationController
       params.require(:booking).permit(:start_date, :end_date)
     end
 
-    # processe de payement 
-    def process_payment
-    # Intégration avec Stripe (ou autre système de paiement)
-    payment = @booking.create_payment(
-      amount: @booking.total_price,
-      status: 'pending',
-      payment_method: params[:payment_method]
-    )
-    
-    # Logique de paiement (à remplacer par votre intégration réelle)
-    if payment.process
-      payment.update(status: 'paid')
-      BookingMailer.confirmation(@booking).deliver_later
-    else
-      @booking.destroy
-      flash[:alert] = "Le paiement a échoué. Veuillez réessayer."
-      render :new
-    end
-  end
+
 end
