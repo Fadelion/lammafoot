@@ -9,6 +9,10 @@ class Payment < ApplicationRecord
 
   before_validation :set_default_status, on: :create
 
+  def completed?
+    status == "completed"
+  end
+
   private
 
   def set_default_status

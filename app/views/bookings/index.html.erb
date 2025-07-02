@@ -28,7 +28,7 @@
                 
                 <% if booking.status == 'pending' %>
                   <%= link_to "Payer", new_booking_payment_path(booking), class: "btn btn-success btn-sm" %>
-                  <%= link_to "Annuler", booking_path(booking), method: :patch, data: { confirm: "Confirmer l'annulation ?" }, class: "btn btn-outline-danger btn-sm" %>
+                  <%= link_to "Annuler", cancel_booking_path(booking), method: :patch, data: { confirm: "Confirmer l'annulation ?" }, class: "btn btn-outline-danger btn-sm" %>
                 <% elsif booking.status == 'confirmed' && booking.start_date > Time.current %>
                   <%= link_to "Annuler", cancel_booking_path(booking), method: :patch, data: { confirm: "Confirmer l'annulation ?" }, class: "btn btn-outline-danger btn-sm" %>
                 <% end %>

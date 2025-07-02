@@ -4,42 +4,19 @@ class Admin::PaymentsController < ApplicationController
   before_action :set_payment, only: [ :show, :edit, :update, :destroy ]
 
   def index
-    @payments = Payment.includes(:user, booking: :stadium).order(created_at: :desc)
+    @payments = Payment.includes(:user, :booking).order(created_at: :desc)
   end
 
   def show
   end
 
-  def new
-    @payment = Payment.new
-    @bookings = Booking.where(status: [ "pending", "confirmed" ]).includes(:user, :stadium)
-    @users = User.all
-  end
-
-  def create
-    @payment = Payment.new(payment_params)
-
-    if @payment.save
-      @payment.booking.update(status: "confirmed")
-      redirect_to admin_payment_path(@payment), notice: "Payment was successfully created."
-    else
-      @bookings = Booking.where(status: [ "pending", "confirmed" ]).includes(:user, :stadium)
-      @users = User.all
-      render :new, status: :unprocessable_entity
-    end
-  end
-
   def edit
-    @bookings = Booking.includes(:user, :stadium)
-    @users = User.all
   end
 
   def update
     if @payment.update(payment_params)
       redirect_to admin_payment_path(@payment), notice: "Payment was successfully updated."
     else
-      @bookings = Booking.includes(:user, :stadium)
-      @users = User.all
       render :edit, status: :unprocessable_entity
     end
   end
@@ -56,6 +33,6 @@ class Admin::PaymentsController < ApplicationController
   end
 
   def payment_params
-    params.require(:payment).permit(:user_id, :booking_id, :amount, :payment_date, :payment_method, :status)
+    params.require(:payment).permit(:status, :payment_method, :amount)
   end
 end

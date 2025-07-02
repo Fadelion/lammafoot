@@ -33,20 +33,28 @@ Rails.application.configure do
 
   # Configuration Action Mailer pour le développement
   config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.perform_deliveries = true
   config.action_mailer.perform_caching = false
   config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
 
-  # Configuration SMTP pour Gmail (à adapter selon vos besoins)
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    address: "smtp.gmail.com",
-    port: 587,
-    domain: "gmail.com",
-    user_name: ENV["GMAIL_USERNAME"], # Votre email Gmail
-    password: ENV["GMAIL_PASSWORD"],   # Mot de passe d'application Gmail
-    authentication: "plain",
-    enable_starttls_auto: true
-  }
+  # Configuration email développement - basculement via variable d'environnement
+  if ENV['USE_SENDGRID'] == 'true'
+    # Configuration SendGrid SMTP pour tests réels
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+      address: 'smtp.sendgrid.net',
+      port: 587,
+      domain: 'localhost',
+      user_name: 'apikey',
+      password: ENV['SENDGRID_API_KEY'],
+      authentication: 'plain',
+      enable_starttls_auto: true
+    }
+  else
+    # Mode développement - emails capturés par Letter Opener Web
+    config.action_mailer.delivery_method = :letter_opener_web
+  end
+  
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

@@ -1,0 +1,23 @@
+LAMMAFOOT - Confirmation de Paiement
+
+Bonjour <%= @user.first_name || @user.email %>,
+
+Nous avons bien reçu votre paiement pour la réservation suivante :
+
+DÉTAILS DE LA RÉSERVATION :
+- Stade : <%= @stadium.name %>
+- Lieu : <%= @stadium.location %>
+- Date et heure : <%= @booking.start_date.strftime("%d/%m/%Y de %H:%M") %> à <%= @booking.end_date.strftime("%H:%M") %>
+- Durée : <%= @booking.duration_in_hours %> heure(s)
+- Prix total : <%= number_to_currency(@booking.total_price, unit: "€") %>
+<% if defined?(@payment) && @payment %>
+- Montant payé : <%= number_to_currency(@payment.amount, unit: "€") %>
+- Méthode de paiement : <%= @payment.payment_method.capitalize %>
+<% end %>
+
+Votre réservation est maintenant CONFIRMÉE. Vous recevrez un rappel 24h avant votre match.
+
+Merci de votre confiance !
+L'équipe LammaFoot
+
+© <%= Date.current.year %> LammaFoot - Votre plateforme de réservation de terrains

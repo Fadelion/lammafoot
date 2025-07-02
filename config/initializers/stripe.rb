@@ -5,4 +5,8 @@ Rails.application.configure do
   }
 end
 
-Stripe.api_key = Rails.application.config.stripe[:secret_key]
+if Rails.application.config.stripe[:secret_key].present?
+  Stripe.api_key = Rails.application.config.stripe[:secret_key]
+else
+  Rails.logger.warn "Stripe secret key not configured" unless Rails.env.test?
+end

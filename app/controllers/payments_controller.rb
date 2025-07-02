@@ -19,31 +19,19 @@ class PaymentsController < ApplicationController
 
   def stripe_success
     session_id = params[:session_id]
-    stripe_service = StripeService.new
+    return redirect_to new_booking_payment_path(@booking), alert: "Session ID manquant." if session_id.blank?
 
     begin
+      stripe_service = StripeService.new
       session = stripe_service.retrieve_session(session_id)
 
       if session.payment_status == "paid"
-        @payment = @booking.payment || Payment.new(booking: @booking, user: current_user)
-        @payment.amount = @booking.total_price
-        @payment.payment_method = "stripe"
-        @payment.status = "completed"
-        @payment.payment_date = Time.current
-        @payment.stripe_session_id = session_id
-
-        if @payment.save
-          @booking.update(status: "confirmed")
-          BookingMailer.payment_confirmation(@payment).deliver_now
-          TwilioService.new.send_booking_confirmation_sms(@booking)
-          redirect_to booking_path(@booking), notice: "Paiement réussi ! Votre réservation est confirmée."
-        else
-          redirect_to new_booking_payment_path(@booking), alert: "Erreur lors de l'enregistrement du paiement."
-        end
+        process_successful_payment(session_id)
       else
         redirect_to new_booking_payment_path(@booking), alert: "Le paiement n'a pas été complété."
       end
-    rescue Stripe::StripeError => e
+    rescue => e
+      Rails.logger.error "Stripe success error: #{e.message}"
       redirect_to new_booking_payment_path(@booking), alert: "Erreur de paiement Stripe."
     end
   end
@@ -58,13 +46,36 @@ class PaymentsController < ApplicationController
   private
 
   def create_stripe_checkout
-    stripe_service = StripeService.new
-
     begin
+      stripe_service = StripeService.new
       session = stripe_service.create_checkout_session(@booking)
+      Rails.logger.info "Stripe session created: #{session.id}"
+      
       redirect_to session.url, allow_other_host: true
-    rescue Stripe::StripeError => e
-      redirect_to new_booking_payment_path(@booking), alert: "Erreur lors de la création de la session de paiement."
+    rescue => e
+      Rails.logger.error "Stripe checkout error: #{e.class} - #{e.message}"
+      Rails.logger.error e.backtrace.join("\n")
+      redirect_to new_booking_payment_path(@booking), alert: "Erreur: #{e.message}"
+    end
+  end
+
+  def process_successful_payment(session_id)
+    @payment = @booking.payment || Payment.new(booking: @booking, user: current_user)
+    @payment.assign_attributes(
+      amount: @booking.total_price,
+      payment_method: "stripe",
+      status: "completed",
+      payment_date: Time.current,
+      stripe_session_id: session_id
+    )
+
+    if @payment.save
+      @booking.update!(status: "confirmed")
+      BookingMailer.payment_confirmation(@payment).deliver_now
+      TwilioService.new.send_booking_confirmation_sms(@booking)
+      redirect_to booking_path(@booking), notice: "Paiement réussi ! Votre réservation est confirmée."
+    else
+      redirect_to new_booking_payment_path(@booking), alert: "Erreur lors de l'enregistrement du paiement."
     end
   end
 
@@ -92,6 +103,7 @@ class PaymentsController < ApplicationController
 
   def set_payment
     @payment = @booking.payment
+    redirect_to new_booking_payment_path(@booking), alert: "Aucun paiement trouvé pour cette réservation." unless @payment
   end
 
   def authorize_payment_owner

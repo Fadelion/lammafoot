@@ -12,8 +12,8 @@ class Stadium < ApplicationRecord
 
   def available_at?(start_time, end_time)
     !bookings.where.not(status: "cancelled")
-             .where("(start_date <= ? AND end_date >= ?) OR (start_date <= ? AND end_date >= ?) OR (start_date >= ? AND end_date <= ?)",
-                    end_time, start_time, start_time, start_time, start_time, end_time)
+             .where("(start_date < ? AND end_date > ?) OR (start_date < ? AND end_date > ?) OR (start_date >= ? AND start_date < ?)",
+                    end_time, start_time, start_time, end_time, start_time, end_time)
              .exists?
   end
 
