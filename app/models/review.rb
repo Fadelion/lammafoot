@@ -11,6 +11,8 @@ class Review < ApplicationRecord
   private
 
   def user_has_booked_stadium
+    return if user.nil? || stadium.nil?
+    
     unless user.bookings.where(stadium_id: stadium_id, status: "completed").exists?
       errors.add(:base, "You can only review stadiums you have booked and used")
     end

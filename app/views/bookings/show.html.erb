@@ -1,8 +1,56 @@
-<h1>Bookings#show</h1>
-<p>Find me in app/views/bookings/show.html.erb</p>
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h3>Détails de la réservation #<%= @booking.id %></h3>
+          <span class="badge bg-<%= @booking.status == 'confirmed' ? 'success' : @booking.status == 'pending' ? 'warning' : @booking.status == 'cancelled' ? 'danger' : 'info' %> fs-6">
+            <%= @booking.status.capitalize %>
+          </span>
+        </div>
+        <div class="card-body">
+          <div class="row mb-4">
+            <div class="col-md-6">
+              <h5>Informations du terrain</h5>
+              <p><strong>Nom :</strong> <%= @booking.stadium.name %></p>
+              <p><strong>Localisation :</strong> <%= @booking.stadium.location %></p>
+              <p><strong>Prix/heure :</strong> <%= number_to_currency(@booking.stadium.price, unit: '€') %></p>
+            </div>
+            <div class="col-md-6">
+              <h5>Détails de la réservation</h5>
+              <p><strong>Date de début :</strong> <%= @booking.start_date.strftime('%d/%m/%Y à %H:%M') %></p>
+              <p><strong>Date de fin :</strong> <%= @booking.end_date.strftime('%d/%m/%Y à %H:%M') %></p>
+              <p><strong>Durée :</strong> <%= @booking.duration_in_hours %> heure(s)</p>
+              <p><strong>Prix total :</strong> <span class="h5 text-primary"><%= number_to_currency(@booking.total_price, unit: '€') %></span></p>
+            </div>
+          </div>
 
-<h1><%=  @bookings.title %></h1>
-<%= simple_format(@bookings.content) %>
+          <% if @booking.payment %>
+            <div class="alert alert-info">
+              <h6><i class="fas fa-credit-card"></i> Informations de paiement</h6>
+              <p><strong>Statut :</strong> <%= @booking.payment.status.capitalize %></p>
+              <p><strong>Méthode :</strong> <%= @booking.payment.payment_method %></p>
+              <p><strong>Date :</strong> <%= @booking.payment.payment_date.strftime('%d/%m/%Y à %H:%M') %></p>
+            </div>
+          <% end %>
 
-<%= link_to "Editer", edit_bookings_path(@topic) %>
-<%= link_to 'Retour index', bookings_path %>
+          <div class="d-flex gap-2 justify-content-between">
+            <div>
+              <%= link_to "Retour à mes réservations", bookings_path, class: "btn btn-secondary" %>
+            </div>
+            <div>
+              <% if @booking.status == 'pending' %>
+                <%= link_to "Procéder au paiement", new_booking_payment_path(@booking), class: "btn btn-success" %>
+                <%= link_to "Annuler", cancel_booking_path(@booking), method: :patch, data: { confirm: "Confirmer l'annulation ?" }, class: "btn btn-outline-danger" %>
+              <% elsif @booking.status == 'confirmed' && @booking.start_date > Time.current %>
+                <%= link_to "Annuler la réservation", cancel_booking_path(@booking), method: :patch, data: { confirm: "Confirmer l'annulation ?" }, class: "btn btn-outline-danger" %>
+              <% elsif @booking.status == 'completed' && !current_user.reviews.where(stadium: @booking.stadium).exists? %>
+                <%= link_to "Laisser un avis", new_stadium_review_path(@booking.stadium), class: "btn btn-outline-primary" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

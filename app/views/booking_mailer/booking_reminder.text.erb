@@ -1,0 +1,19 @@
+LAMMAFOOT - Rappel de Réservation
+
+Bonjour <%= @user.first_name || @user.email %>,
+
+Nous vous rappelons que votre match est prévu DEMAIN :
+
+DÉTAILS DE VOTRE RÉSERVATION :
+- Stade : <%= @stadium.name %>
+- Lieu : <%= @stadium.location %>
+- Date et heure : <%= @booking.start_date.strftime("%d/%m/%Y de %H:%M") %> à <%= @booking.end_date.strftime("%H:%M") %>
+- Durée : <%= @booking.duration_in_hours %> heure(s)
+- Prix total : <%= number_to_currency(@booking.total_price, unit: "€") %>
+
+N'oubliez pas d'arriver 15 minutes avant l'heure prévue.
+
+À bientôt sur le terrain !
+L'équipe LammaFoot
+
+© <%= Date.current.year %> LammaFoot - Votre plateforme de réservation de terrains

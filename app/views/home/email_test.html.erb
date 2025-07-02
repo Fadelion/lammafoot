@@ -1,0 +1,58 @@
+<div class="container mt-4">
+  <h1>🧪 Test des Emails - LammaFoot</h1>
+  
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h4>Test Letter Opener Web (Développement)</h4>
+        </div>
+        <div class="card-body">
+          <%= form_with url: send_test_email_path, method: :post, local: true do |form| %>
+            <div class="mb-3">
+              <%= form.label :email, "Email destinataire", class: "form-label" %>
+              <%= form.email_field :email, placeholder: "test@example.com", class: "form-control" %>
+            </div>
+            <%= form.submit "Test Letter Opener", class: "btn btn-outline-primary" %>
+          <% end %>
+          <small class="text-muted">Les emails seront capturés et affichés dans Letter Opener Web</small>
+        </div>
+      </div>
+      
+      <div class="card mt-4">
+        <div class="card-header">
+          <h4>Test SendGrid (Envoi Réel)</h4>
+        </div>
+        <div class="card-body">
+          <%= form_with url: send_test_email_path, method: :post, local: true do |form| %>
+            <div class="mb-3">
+              <%= form.label :email, "Email destinataire", class: "form-label" %>
+              <%= form.email_field :email, placeholder: "votre@email.com", class: "form-control" %>
+              <div class="form-text">⚠️ L'email sera envoyé réellement via SendGrid</div>
+            </div>
+            <%= form.hidden_field :use_sendgrid, value: '1' %>
+            <%= form.submit "Test SendGrid (Envoi Réel)", class: "btn btn-success" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header">
+          <h5>Configuration Actuelle</h5>
+        </div>
+        <div class="card-body">
+          <p><strong>Delivery Method:</strong> <%= ActionMailer::Base.delivery_method %></p>
+          <p><strong>From Email:</strong> <%= ActionMailer::Base.default[:from] %></p>
+          <p><strong>USE_SENDGRID:</strong> <%= ENV['USE_SENDGRID'] || 'false' %></p>
+          
+          <hr>
+          <h6>Liens Utiles</h6>
+          <%= link_to "Letter Opener Web", "/letter_opener", target: "_blank", class: "btn btn-sm btn-outline-secondary d-block mb-2" %>
+          <%= link_to "Retour Accueil", root_path, class: "btn btn-sm btn-secondary d-block" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -47,21 +47,25 @@ class Booking < ApplicationRecord
     return if end_date.blank? || start_date.blank?
 
     if end_date <= start_date
-      errors.add(:end_date, "must be after the start date")
+      errors.add(:end_date, "doit être après la date de début")
+    end
+    
+    if start_date < Time.current
+      errors.add(:start_date, "ne peut pas être dans le passé")
     end
   end
 
   def no_overlapping_bookings
-    return if start_date.blank? || end_date.blank?
+    return if start_date.blank? || end_date.blank? || stadium.blank?
 
     overlapping_bookings = stadium.bookings
                                  .where.not(id: id)
                                  .where.not(status: "cancelled")
-                                 .where("(start_date <= ? AND end_date >= ?) OR (start_date <= ? AND end_date >= ?) OR (start_date >= ? AND end_date <= ?)",
-                                        end_date, start_date, start_date, start_date, start_date, end_date)
+                                 .where("(start_date < ? AND end_date > ?) OR (start_date < ? AND end_date > ?) OR (start_date >= ? AND start_date < ?)",
+                                        end_date, start_date, start_date, end_date, start_date, end_date)
 
     if overlapping_bookings.exists?
-      errors.add(:base, "The stadium is already booked during this time period")
+      errors.add(:base, "Le stade est déjà réservé pendant cette période")
     end
   end
 end

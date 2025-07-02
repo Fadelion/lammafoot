@@ -27,7 +27,8 @@ regular_users = []
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     email: "user#{i+1}@example.com",
-    password: "password123"
+    password: "password123",
+    phone_number: "+336#{rand(10000000..99999999)}"
   )
   regular_users << user
   puts "Regular user created: #{user.email}"

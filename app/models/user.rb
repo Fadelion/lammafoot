@@ -13,6 +13,14 @@ class User < ApplicationRecord
 
   before_create :set_default_role
 
+  def admin?
+    role == "admin"
+  end
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
   private
 
   def set_default_role
