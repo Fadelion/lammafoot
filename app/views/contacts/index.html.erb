@@ -1,0 +1,24 @@
+<main>
+  <div class="contact-container">
+    <h2>Contactez-nous</h2>
+
+    <%= form_with url: contacts_path, method: :post, class: "contact-form" do |f| %>
+      <div class="form-group">
+        <%= f.label :name, "Nom" %>
+        <%= f.text_field :name, placeholder: "Votre nom", required: true, id: "name" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :email, "Email" %>
+        <%= f.email_field :email, placeholder: "Votre email", required: true, id: "email" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :message, "Message" %>
+        <%= f.text_area :message, rows: 5, placeholder: "Votre message...", required: true, id: "message" %>
+      </div>
+
+      <%= f.submit "Envoyer", class: "btn-submit" %>
+    <% end %>
+  </div>
+</main>
