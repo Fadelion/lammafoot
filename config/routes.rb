@@ -28,6 +28,11 @@ Rails.application.routes.draw do
     end
   end
 
+# Contact routes
+get "/contact", to: "contacts#new", as: :contact
+resources :contacts, only: [:create]
+
+ 
   # Review routes
   resources :reviews, except: [ :index, :show, :new, :create ]
 
